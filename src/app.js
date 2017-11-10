@@ -15,14 +15,15 @@ import {eventListener} from './sagas/index';
 //rx
 import { createEpicMiddleware } from 'redux-observable';
 import {rootEpic} from './epics/index';
+
 // create the saga middleware
-const sagaMiddleware = createSagaMiddleware();
-let store = createStore(reducers, initState, applyMiddleware(sagaMiddleware, logger));
-sagaMiddleware.run(eventListener);
+// const sagaMiddleware = createSagaMiddleware();
+// let store = createStore(reducers, initState, applyMiddleware(sagaMiddleware, logger));
+// sagaMiddleware.run(eventListener);
 
 //create rx middleware
-//const epicMiddleware = createEpicMiddleware(rootEpic);
-//let store = createStore(reducers, initState, applyMiddleware(epicMiddleware, logger));
+const epicMiddleware = createEpicMiddleware(rootEpic);
+let store = createStore(reducers, initState, applyMiddleware(epicMiddleware, logger));
 
 ReactDOM.render(
     <Provider store={store}>
